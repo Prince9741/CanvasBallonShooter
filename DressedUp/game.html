@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+</html>
+<script type="module">
+    import Animation from "./Animation.js";
+    import bubbleShooter from "./Game.js";
+    let panel=new Animation(document.getElementById("canvas"));
+    panel.start(new bubbleShooter());
+</script>
