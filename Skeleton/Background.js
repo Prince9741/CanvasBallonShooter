@@ -1,8 +1,7 @@
 export class Background{
     constructor(game){
         this.game=game;
-        // this.image=new Image; 
-        // this.image.src="./Images/background.png";//planet
+        this.image=new Image; this.image.src="./Images/background.png";//planet
         this.x=0;
         this.y=0;
         this.speed=1;

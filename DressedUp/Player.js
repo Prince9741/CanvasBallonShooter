@@ -4,7 +4,8 @@ export class Player{
         this.game=game;
         this.x=0;
         this.y=0;
-        this.size=40*this.game.size;
+        this.size=0;
+        this.position();
         this.shot={x:0,y:0};
         this.gun=new Gun(this);
         this.life=2;
@@ -13,9 +14,9 @@ export class Player{
         this.show=true;
         this.img=new Image();
         this.img.src="Images/star.png";
-        this.position();
     }
     position(){
+        this.size=40*this.game.size;
         this.x=this.game.width/2;
         this.y=this.game.height-this.size*1.5;
     }

@@ -1,17 +1,19 @@
 export class Enemy{
     constructor(game){
         this.game=game;
-        this.size=[40,20];//40-60
-        this.speed=[1,5];//1-6
-        this.density=180;
-        this.enemyArr=[];
+        this.size;
+        this.speed;
         this.x;
         this.y;
+        this.position();
+        this.density=180;
+        this.enemyArr=[];
         this.img=new Image();
         this.img.src="Images/Enemy.png";
-        this.position();
     }
     position(){
+        this.size=[40,20];//40-60
+        this.speed=[1,5];//1-6
         this.y=this.game.height;
     }
     update(){

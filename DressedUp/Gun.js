@@ -49,7 +49,6 @@ class Bullet{
         if(this.x<-this.size || this.x>this.gun.player.game.width+this.size ||
             this.y<-this.size || this.y>this.gun.player.game.height+this.size)
             this.life=false;
-        this.collision();
     }
     draw(ctx){
         ctx.save();
@@ -63,17 +62,5 @@ class Bullet{
         ctx.fillStyle="black";
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.fill();
-    }
-    collision(){
-        if(this.gun.player.game.entities.enemies)
-            for(let e of this.gun.player.game.entities.enemies.enemyArr)
-                if(!e.explosion){
-                    let dX=this.x-e.x;
-                    let dY=this.y-e.y;
-                    if(Math.sqrt(dX*dX+dY*dY)<this.size+e.size){
-                        e.explode();
-                        this.score++;
-                    }
-                }
     }
 }

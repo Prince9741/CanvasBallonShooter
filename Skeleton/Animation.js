@@ -4,6 +4,7 @@ export default class Animation{
         this.sound=sound;
         this.ctx=this.canvas.getContext('2d');
         this.obj;
+        this.position();
         window.onresize=()=>this.position();//change dimension here
         window.addEventListener("keypress",(e)=>{
             if(e.code=="KeyF") {
@@ -28,7 +29,6 @@ export default class Animation{
     position(){
         this.canvas.width=window.innerWidth;
         this.canvas.height=window.innerHeight-4;
-        this.obj && this.obj.position(this.canvas.width,this.canvas.height);
         this.obj && this.obj.position(this.canvas.width,this.canvas.height);
     }
     putSoundOnObj(){

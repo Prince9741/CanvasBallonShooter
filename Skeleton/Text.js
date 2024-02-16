@@ -14,15 +14,7 @@ export class Text {
         this.drawM(ctx);
     }
     drawM(ctx) {
-        this.game.entities.player && this.rightTopText(ctx,15,0,"Score: "+this.game.entities.player.score,this.size);
-        this.game.entities.player && this.leftTopText(ctx,15,0,"Life: "+this.game.entities.player.life,this.size);
-        if(!this.game.play){
-            this.centerText(ctx,0,-this.size,"Game Over",this.size);
-            this.centerText(ctx,0,0,"Press 'Enter' to New-Game",this.size);
-        }
-        else if(!this.game.updation){
-            this.centerText(ctx,0,0,"Pause",this.size);
-        }
+       
     }
     centerText(ctx, X, Y, text, fontSize, color = "black") {
         ctx.font = fontSize + "px arial";

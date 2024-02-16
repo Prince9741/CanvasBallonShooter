@@ -4,6 +4,8 @@ import {Background} from "./Background.js";
 import {Text} from "./Text.js";
 export default class Game{
     constructor(sound=0){
+        this.width=canvas.width;
+        this.height=canvas.height;
         this.newGame(sound);
     }
     newGame(sound){
@@ -20,6 +22,7 @@ export default class Game{
             enemies:new Enemy(this),
             text:new Text(this)
         };
+        this.switch=false;
         this.control=new Control(this);
         console.log("Game Start");
     }
@@ -32,15 +35,34 @@ export default class Game{
             this.dL--;
     }
     frame(ctx){
-        if(this.updation && ++this.frameCnt%400==0)
-            this.levelUp();
+        ++this.frameCnt;
         for(let a in this.entities){
-            this.entities[a].draw(ctx);//call drawM for masking and draw for Images
+            this.switch?this.entities[a].draw(ctx):this.entities[a].drawM(ctx);//call drawM for masking and draw for Images
             this.updation && this.entities[a].update();
         }
+        this.calculaion();
+    }
+    calculaion(){
+        if(this.updation && this.frameCnt%400==0)
+            this.levelUp();
+        this.bulletEnemyCollied();
+    }
+    bulletEnemyCollied(){//bullet collisions With Enemies
+        if(this.entities.player && this.entities.enemies)
+            for(let b of this.entities.player.gun.bulletArr)
+                for(let e of this.entities.enemies.enemyArr)
+                    if(!e.explosion){
+                        let dX=b.x-e.x;
+                        let dY=b.y-e.y;
+                        if(Math.sqrt(dX*dX+dY*dY)<b.size+e.size){
+                            e.explode();
+                            this.entities.player.score++;
+                        }
+                    }
     }
     position(w,h){
-        this.width=w,this.height=h;
+        this.width=w;
+        this.height=h;
         for(let a in this.entities)
             this.entities[a].position();
     }
@@ -69,7 +91,7 @@ class Control{//control input from here
         });
         window.addEventListener("keypress",(e)=>{  //Gaming Control
             if(e.key=="Enter" && !this.game.play)  //start new Game
-                this.game.newGame(this.game.sound);
+                this.game.newGame(this.width,this.height,this.game.sound);
             else if(e.code=="Space")               //Pause and Play
                 this.game.pausePlay();
         });
@@ -84,6 +106,8 @@ class Control{//control input from here
                 this.game.entities.backgroud && this.game.entities.backgroud.reverse();
             else if(e.code=="KeyL" && e.shiftKey) 
                 this.game.entities.player && this.game.entities.player.life++;   
+            else if(e.code=="KeyK" && e.shiftKey)
+                this.game.switch=!this.game.switch;
         });
     }
 }
