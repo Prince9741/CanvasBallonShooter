@@ -22,7 +22,7 @@ export default class Game{
             enemies:new Enemy(this),
             text:new Text(this)
         };
-        this.switch=false;
+        this.switch=true;
         this.control=new Control(this);
         console.log("Game Start");
     }
@@ -91,7 +91,7 @@ class Control{//control input from here
         });
         window.addEventListener("keypress",(e)=>{  //Gaming Control
             if(e.key=="Enter" && !this.game.play)  //start new Game
-                this.game.newGame(this.width,this.height,this.game.sound);
+                this.game.newGame(this.game.sound);
             else if(e.code=="Space")               //Pause and Play
                 this.game.pausePlay();
         });
